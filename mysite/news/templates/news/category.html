@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title%}
-    {{ title }} :: {{ block.super }}
+    {{ category.title }} :: {{ block.super }}
 {% endblock %}
 
 {% block sidebar %}
@@ -12,7 +12,7 @@
         {% for i in news %}
             <div class="card mb-3">
               <div class="card-header">
-                  Категория: <a href="{% url 'category' i.create.pk %}"> {{ i.create }}</a>
+                Категория: {{ i.create }}
               </div>
               <div class="card-body">
                 <div class="media">
@@ -34,3 +34,4 @@
         </div>
         {% endfor %}
 {% endblock %}
+
