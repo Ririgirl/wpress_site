@@ -9,7 +9,7 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', verbose_name='Фото', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
-    create = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')  # защищена от удалени, если удалена категория
+    create = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')  # защищена от удалени, если удалена категория
 
     def __str__(self):
         return self.title
