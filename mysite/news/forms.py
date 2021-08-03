@@ -1,11 +1,15 @@
 from django import forms
 from .models import Category, News
+import re
+from django.core.exceptions import ValidationError
+
 
 # class NewsForm(forms.Form):
 #     title = forms.CharField(max_length=200, label='Заголовок', widget=forms.TextInput(attrs={'class': 'form-control'}))
 #     content = forms.CharField(label='Описание', required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
 #     is_published = forms.BooleanField(label='Опубликовать?', initial=True, widget= forms.CheckboxInput(attrs={'class': 'form-check-label'}))
 #     create = forms.ModelChoiceField(queryset=Category.objects.all(), label='Категория', empty_label='Выберите категорию', widget=forms.Select(attrs={'class': 'form-control'}))
+
 
 class NewsForm(forms.ModelForm):
     class Meta:
@@ -20,5 +24,11 @@ class NewsForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-		    super().__init__(*args, **kwargs)
-		    self.fields['create'].empty_label = 'Выберите категорию'
+        super().__init__(*args, **kwargs)
+        self.fields['create'].empty_label = 'Выберите категорию'
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if re.match(r'\d', title):
+            raise ValidationError('Наименование не должно начинаться с цифры')
+        return title
