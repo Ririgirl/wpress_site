@@ -12,6 +12,7 @@ class HomeNews(ListView):
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
     extra_context = {'title': 'Главная'}
+    #queryset = News.objects.select_related('create')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,7 +20,7 @@ class HomeNews(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(is_published=True)
+        return News.objects.filter(is_published=True).select_related('create')
 
 
 # def index(request):
@@ -39,7 +40,7 @@ class NewsByCategory(ListView):
     allow_empty = None #запрет на показ пустых списков
 
     def get_queryset(self):
-        return News.objects.filter(create_id = self.kwargs['create_id'], is_published=True)
+        return News.objects.filter(create_id=self.kwargs['create_id'], is_published=True).select_related('create')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

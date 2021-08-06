@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news.apps.NewsConfig'
+    'news.apps.NewsConfig',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -79,6 +81,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        #mysql
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'django',
+        # 'USER': 'root',
+        # 'PASSWORD': '1q2w3e4r5',
+        # 'HOST': 'localhost',
+        #postgres
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'wpress_django',
+        # 'USER': 'postgres',
+        # 'PASSWORD': '1q2w3e4r5',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '5432',
     }
 }
 
@@ -133,3 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

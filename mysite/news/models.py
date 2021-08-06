@@ -10,6 +10,7 @@ class News(models.Model):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', verbose_name='Фото', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     create = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')  # защищена от удалени, если удалена категория
+    views = models.IntegerField(default=0, verbose_name='Количество просмотров')
 
     def __str__(self):
         return self.title
