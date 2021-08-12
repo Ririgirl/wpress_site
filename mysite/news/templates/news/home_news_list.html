@@ -24,7 +24,7 @@
                     {% endif %}
                     <div class="media-body">
                       <h5 class="card-title">{{ i.title }}</h5>
-                      <p class="card-text">{{ i.content|linebreaks|truncatewords:25 }}</p>
+                      <p class="card-text">{{ i.content|safe|linebreaks|truncatewords:25 }}</p>
                       <a href="{{ i.get_absolute_url }}" class="btn btn-primary">Read more...</a>
                     </div>
                 </div>

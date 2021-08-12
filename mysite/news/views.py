@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404, redirect
 from django.http import HttpResponse
 from django.utils import timezone
 from .models import News, Category
-from .forms import NewsForm, UserRegisterForm, UserLoginForm
+from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse_lazy
 from .utils import MyMixin
@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.core.mail import send_mail
 
 
 def register(request):
@@ -42,6 +43,23 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(data=request.POST)
+        if form.is_valid():
+            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['content'], 'почта из сеттингс', ['перечисляем почту на которую отправляем письмо'], fail_silently=True)
+            if mail:
+                messages.success(request, 'Письмо отправлено!')
+                return redirect('contact')
+            else:
+                messages.error(request, 'Ошибка отправки')
+        else:
+            messages.error(request, 'Ошибка валидации')
+    else:
+        form = ContactForm()
+    return render(request, 'news/email.html', {'form': form})
 
 
 class HomeNews(MyMixin, ListView):
