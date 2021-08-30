@@ -146,3 +146,4 @@ class CreateNews(LoginRequiredMixin, CreateView):
 #     return render(request, 'news/add_news.html', {'form': form})
 
 
+

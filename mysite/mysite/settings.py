@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'ckeditor',
     'ckeditor_uploader',
-    'captcha'
+    'captcha',
+    'testapp.apps.TestappConfig',
+    'mptt'
 ]
 
 MIDDLEWARE = [
@@ -88,13 +90,13 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'django',
         # 'USER': 'root',
-        # 'PASSWORD': '1q2w3e4r5',
+        # 'PASSWORD': '',
         # 'HOST': 'localhost',
         #postgres
         # 'ENGINE': 'django.db.backends.postgresql',
         # 'NAME': 'wpress_django',
         # 'USER': 'postgres',
-        # 'PASSWORD': '1q2w3e4r5',
+        # 'PASSWORD': '',
         # 'HOST': '127.0.0.1',
         # 'PORT': '5432',
     }
@@ -238,3 +240,5 @@ CACHES = {
         'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
     }
 }
+
+MPTT_ADMIN_LEVEL_INDENT = 20
